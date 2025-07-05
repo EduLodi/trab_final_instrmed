@@ -25,7 +25,7 @@ float update_filter(float x, float a1, float a2, float w[]) {
 }
 
 // --- ADC Configuration ---
-#define READ_LEN_BYTES SOC_ADC_DIGI_RESULT_BYTES*200
+#define READ_LEN_BYTES SOC_ADC_DIGI_RESULT_BYTES*100
 const int N_SAMPLES_PER_BUFFER = READ_LEN_BYTES / SOC_ADC_DIGI_RESULT_BYTES;  // Should be 256
 
 // --- Global Variables for Task Communication ---
@@ -110,7 +110,7 @@ void setup() {
   // --- Initialize ADC and its callbacks ---
   adc_continuous_handle_cfg_t adc_config = { .max_store_buf_size = READ_LEN_BYTES * 2, .conv_frame_size = READ_LEN_BYTES };
   ESP_ERROR_CHECK(adc_continuous_new_handle(&adc_config, &adc_handle));
-  adc_continuous_config_t dig_cfg = { .sample_freq_hz = 20 * 1000, .conv_mode = ADC_CONV_SINGLE_UNIT_1, .format = ADC_DIGI_OUTPUT_FORMAT_TYPE1 };
+  adc_continuous_config_t dig_cfg = { .sample_freq_hz = 24000, .conv_mode = ADC_CONV_SINGLE_UNIT_1, .format = ADC_DIGI_OUTPUT_FORMAT_TYPE1 };
   adc_digi_pattern_config_t adc_pattern[1] = { 0 };
   adc_pattern[0].atten = ADC_ATTEN_DB_12;
   adc_pattern[0].channel = ADC_CHANNEL_0;
